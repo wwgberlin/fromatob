@@ -29,6 +29,11 @@ func mission1(g *pkg.Graph) {
 		want bool
 	}{
 		{"Berlin", "München", true},
+		{"Jena", "Aachen", true},
+		{"Hamburg", "Augsburg", true},
+		{"Hiroshima", "Tokyo", true},
+		{"Kyoto", "Dresden", false},
+		{"Köln", "Tokyo", false},
 	}
 	for _, c := range cases {
 		fmt.Printf("%s -- %s ", c.a, c.b)
@@ -53,6 +58,10 @@ func mission2(g *pkg.Graph) {
 		wantLength int
 	}{
 		{"Berlin", "München", 4},
+		{"Leipzig", "Dortmund", 4},
+		{"Aachen", "Berlin", 5},
+		{"Frankfurt", "Nürnberg", 2},
+		{"Hamburg", "Bremen", 1},
 	}
 	for _, c := range cases {
 		fmt.Printf("%s -- %s ", c.a, c.b)
@@ -60,10 +69,16 @@ func mission2(g *pkg.Graph) {
 		b, _ := g.LookupNode(c.b)
 		got := g.ShortestPath(a, b)
 		gotLength := len(got) - 1
-		if g.PathExists(got) && gotLength == c.wantLength {
-			fmt.Println("✓")
-		} else {
+		if !g.PathExists(got) {
 			fmt.Println("❌")
+			fmt.Printf("    %s is not a valid path!\n", g.PrintPath(got, "-"))
+		} else if gotLength > c.wantLength {
+			fmt.Println("❌")
+			fmt.Printf("    %s has length %d, but we can do better!\n",
+				g.PrintPath(got, "-"), gotLength)
+		} else {
+			fmt.Println("✓")
+			fmt.Printf("    %s\n", g.PrintPath(got, "-"))
 		}
 	}
 	fmt.Println()

@@ -22,6 +22,11 @@ func (g *Graph) Edges() int {
 	return count / 2
 }
 
+// Neighbors returns the list of neighbors of a given node.
+func (g *Graph) Neighbors(i int) []int {
+	return g.edges[i]
+}
+
 // PathExists checks if the given path exists in the graph. The path is specified by a list of the
 // node IDs in the graph.
 func (g *Graph) PathExists(path []int) bool {

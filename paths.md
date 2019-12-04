@@ -30,6 +30,8 @@ Lübeck-Kiel
 Mannheim-Basel
 Mannheim-Stuttgart
 Stuttgart-Augsburg
+Tokyo-Kyoto
+Kyoto-Hiroshima
 
 
 
