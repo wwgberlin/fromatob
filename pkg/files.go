@@ -1,4 +1,4 @@
-package main
+package pkg
 
 import (
 	"bufio"
@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// LoadGraph loads a graph from a file.
 func LoadGraph(name string) (*Graph, error) {
 	file, err := os.Open(name)
 	if err != nil {
