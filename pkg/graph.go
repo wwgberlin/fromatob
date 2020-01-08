@@ -1,6 +1,9 @@
 package pkg
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 // A Graph consists of a set of nodes, each of which has an ID and a name, and a set of edges. An
 // edge is simply a connection between two nodes.
@@ -37,7 +40,10 @@ func (g *Graph) PathExists(path []int) bool {
 
 // NodeName returns the name for a node ID.
 func (g *Graph) NodeName(n int) string {
-	return g.nodes[n]
+	if g.ValidNode(n) {
+		return g.nodes[n]
+	}
+	return fmt.Sprintf("<%d ?>", n)
 }
 
 // PrintPath prints the names of the nodes in the path, separated by sep.
