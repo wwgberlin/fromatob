@@ -14,7 +14,7 @@ func main() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	fmt.Printf("Loaded %s (%d nodes, %d edges)\n", filename, g.Nodes(), g.Edges())
+	fmt.Printf("Loaded %s (%d nodes)\n", filename, g.Nodes())
 
 	mission1(g)
 	mission2(g)
@@ -36,14 +36,16 @@ func mission1(g *pkg.Graph) {
 		{"Köln", "Tokyo", false},
 	}
 	for _, c := range cases {
-		fmt.Printf("%s -- %s ", c.a, c.b)
+		fmt.Printf("%-9s -> %-9s ", c.a, c.b)
 		a, _ := g.LookupNode(c.a)
 		b, _ := g.LookupNode(c.b)
 		got := g.Connected(a, b)
 		if got == c.want {
-			fmt.Println("✓")
+			fmt.Println("ok")
+		} else if got == false {
+			fmt.Println("marked as “not connected”, but they are!")
 		} else {
-			fmt.Println("❌")
+			fmt.Println("marked as “connected”, but they are not!")
 		}
 	}
 	fmt.Println()
@@ -64,20 +66,24 @@ func mission2(g *pkg.Graph) {
 		{"Hamburg", "Bremen", 1},
 	}
 	for _, c := range cases {
-		fmt.Printf("%s -- %s ", c.a, c.b)
+		fmt.Printf("%-9s -- %-9s ", c.a, c.b)
 		a, _ := g.LookupNode(c.a)
 		b, _ := g.LookupNode(c.b)
 		got := g.ShortestPath(a, b)
+		if len(got) == 0 {
+			fmt.Println("    no result")
+			continue
+		}
 		gotLength := len(got) - 1
-		if !g.PathExists(got) {
-			fmt.Println("❌")
-			fmt.Printf("    %s is not a valid path!\n", g.PrintPath(got, "-"))
+		if !(len(got) >= 2 && got[0] == a && got[len(got)-1] == b && g.PathExists(got)) {
+			fmt.Println()
+			fmt.Printf("    not a correct path from %s to %s: %s\n",
+				c.a, c.b, g.PrintPath(got, "-"))
 		} else if gotLength > c.wantLength {
-			fmt.Println("❌")
-			fmt.Printf("    %s has length %d, but we can do better!\n",
+			fmt.Printf("%s has length %d, but we can do better!\n",
 				g.PrintPath(got, "-"), gotLength)
 		} else {
-			fmt.Println("✓")
+			fmt.Println("ok")
 			fmt.Printf("    %s\n", g.PrintPath(got, "-"))
 		}
 	}

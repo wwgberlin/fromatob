@@ -2,24 +2,16 @@ package pkg
 
 import "strings"
 
-// A Graph is an undirected graph.
+// A Graph consists of a set of nodes, each of which has an ID and a name, and a set of edges. An
+// edge is simply a connection between two nodes.
 type Graph struct {
 	nodes []string
 	edges [][]int
 }
 
-// Nodes returns the number of nodes (or vertices) in the graph.
+// Nodes returns the number of nodes in the graph.
 func (g *Graph) Nodes() int {
 	return len(g.nodes)
-}
-
-// Edges returns the number of edges in the graph.
-func (g *Graph) Edges() int {
-	count := 0
-	for _, list := range g.edges {
-		count += len(list)
-	}
-	return count / 2
 }
 
 // Neighbors returns the list of neighbors of a given node.
@@ -90,10 +82,18 @@ func (g *Graph) AddEdge(i, j int) {
 
 // HasEdge returns true if there is an edge between the given nodes.
 func (g *Graph) HasEdge(i, j int) bool {
+	if !g.ValidNode(i) && g.ValidNode(j) {
+		return false
+	}
 	for _, k := range g.edges[i] {
 		if k == j {
 			return true
 		}
 	}
 	return false
+}
+
+// ValidNode returns true if i is the ID of a node in the graph.
+func (g *Graph) ValidNode(i int) bool {
+	return i >= 0 && i < len(g.nodes)
 }
