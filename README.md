@@ -10,8 +10,8 @@ The graph is loaded from a file (see `paths.md`) into a data structure called `G
 `pkg/graph.go`). Your challenge is to use the `Graph` structure to find out if and how we can use
 trains to go from one city to another.
 
-`go run cmd/main/main.go` runs your code with some examples. When you’re done, it should print “ok”
-for all of them!
+`go run cmd/go-workshop/main.go` runs your code with some examples. When you’re done, it should
+print “ok” for all of them!
 
 
 ## 1st mission
