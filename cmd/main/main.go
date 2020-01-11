@@ -16,8 +16,22 @@ func main() {
 	}
 	fmt.Printf("Loaded %s (%d nodes)\n", filename, g.Nodes())
 
-	mission1(g)
-	mission2(g)
+	//showing how to use the functions in graph
+	fmt.Println(g.LookupNode("Berlin"))
+	fmt.Println(g.LookupNode("Leipzig"))
+	fmt.Println(g.Neighbors(0))
+
+	//Mini challenge get from Berlin to Leipzig
+	var n = g.Neighbors(0)
+	var j, _ = g.LookupNode("Leipzig")
+
+	for _, a := range n {
+		if a == j {
+			fmt.Printf("Connection exists!")
+		}
+		// mission1(g)
+		// mission2(g)
+	}
 }
 
 func mission1(g *pkg.Graph) {

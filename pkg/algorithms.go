@@ -2,16 +2,18 @@ package pkg
 
 // Connected checks if the given nodes are connected by a path.
 func (g *Graph) Connected(a, b int) bool {
-	var q Queue                           //define q as a slice
-	q.Enqueue(a)                          //enqueue root element a
-	discovered := make([]bool, g.Nodes()) //define discovered as slice bool
-	discovered[a] = true                  //make root element 'discovered'
-
+	//section summary: insert a in queue until all its neighbours vertices are marked
+	var q Queue //define q as a slice
+	q.Enqueue(a)
+	discovered := make(map[int]bool, g.Nodes()) //define discovered as slice bool
+	discovered[a] = true                        //make a as 'discovered'
+	//section summary: Removing that vertex from queue,whose neighbour will be visited now
 	for q.Length() > 0 { //check if an element exist?
 		v := q.Dequeue() //initalize current element as v
 		if v == b {      //if current element is equivalent to the last element
 			return true //we found the connection
 		}
+		//section summary: processing all the neighbours of v
 		for _, n := range g.Neighbors(v) { //look at neighbours for current element v
 			if !discovered[n] { //if neighbours are not discovered
 				discovered[n] = true //mark it as 'discoverd'
