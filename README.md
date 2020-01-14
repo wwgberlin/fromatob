@@ -1,6 +1,6 @@
 # go-workshop
 
-Women Who Go workshop in January challenge
+Welcome to the Women Who Go workshop in January challenge.
 
 This challenge is all about graphs. A graph consists of vertices and edges, where an edge connects
 two vertices. In our case, each vertex represents a city. An edge between two vertices means there’s
@@ -13,14 +13,14 @@ trains to go from one city to another.
 `go run cmd/main/main.go` runs your code with some examples. When you’re done, it should print “ok”
 for all of them!
 
-
-## 1st mission
+##The mission
+Part 1
 
 For the first mission, we just want to find out if two cities are connected at all. In
 `pkg/algorithms.go`, fill in the `Connected` function so it returns true if there’s a train
 connection from `a` to `b`.
 
-
+Now that you know if a to b is connected or not, we can find the shortest path
 ## 2nd mission
 
 For the second mission, we want to find the “shortest path”: the path that connects two cities with
