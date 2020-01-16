@@ -2,10 +2,10 @@
 
 Welcome to the Women Who Go workshop in January challenge with fromatob
 
-# Who is fromatob?
+## What does fromatob do?
 fromAtoB's vision is to combine flights, trains, long distance buses and car-pooling towards your perfect trip from A to B within one booking, one payment, within less than 30 seconds.
 
-# What are we doing today?
+## What are we doing today?
 
 1. Brief explanation on graphs at fromatob
 2. Mini challenge to familiarise ourselves with our graph `pkg/graph.go`
@@ -21,7 +21,7 @@ https://en.wikipedia.org/wiki/Graph_theory
 - Show Graph visual representation
 
 ## How are graphs used at fromatob?
-- google maps itro
+- google maps intro
 - dijkstra + dfs + bfs (find the right solution)
 - What are these algorithms good for?
 (find out more info from Medusa? Chris? Nikita?)
@@ -49,9 +49,8 @@ Eg.
 
 3.
 ## BFS (10 min Jessica)
-Why is it useful?
-What are Queues?
-Step by step on how to queue and visit (screenshot )
+What is queueing? 
+Step by step on how to queue and visit 
 https://en.wikipedia.org/wiki/Breadth-first_search
 https://medium.com/basecs/going-broad-in-a-graph-bfs-traversal-959bd1a09255
 
