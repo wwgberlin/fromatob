@@ -13,21 +13,25 @@ fromAtoB's vision is to combine flights, trains, long distance buses and car-poo
 4. Bring in the mission
 
 1.
-##What are graphs?
-Graphs are mathematical structures used to model pairwise relations between objects. A graph in this context is made up of vertices (also called nodes or points) which are connected by edges
+## What are graphs?
+Graphs are mathematical structures used to model pairwise relations between objects. A graph in this context is made up of vertices (also called nodes or points) which are connected by edges.
 
 https://en.wikipedia.org/wiki/Graph_theory
 
-- Show Graph visual representation
+## What kind of problems do graphs sovle?
 
-##How are graphs used at fromatob?
-- google maps itro
-- dijkstra + dfs + bfs (find the right solution)
-- What are these algorithms good for?
-(find out more info from Medusa? Chris? Nikita?)
+- Computer networks - Often nodes will represent end-systems or routers, while edges represent connections between these systems.
+- Sequence of events - Prioritising projects, finding duration of each project. Use tree structures
+- Pathing and Maps: Trying to find shortest or longest paths from some location to a destination makes use of graphs. This can include pathing like you see in an application like Google maps, or calculating paths for AI characters to take in a video game, and many other similar problems.
+- Constraint Satisfaction: Find some goal that satisfies a list of constraints. For example,Matching professors to courses so classes don't clash
+- Constraint satisfaction problems like this are often modeled and solved using graphs.
+- Molecules: Model atoms and molecules for studying their interaction and structure among other things.
 
+## How are graphs used at fromatob?
+Our main search functions invovles using an undirected graph to connect cities on a map.
+We use open data on public transit timetables and extract the fields we need to build network graphs. Then we create indivudual graphs for each mode of transportation. After that, we run a traversal algorithm like Dijkstra algorithm to find the shortest distance
 2.
-##Explore mini challenges
+## Explore mini challenges
   Print the Node ID for Berlin
   Print the Nodename for NodeID 7
   Print the nodes connected to Berin
@@ -48,7 +52,7 @@ Eg.
     }
 
 3.
-##BFS (10 min Jessica)
+## BFS (10 min Jessica)
 Why is it useful?
 What are Queues?
 Step by step on how to queue and visit (screenshot )
@@ -56,7 +60,7 @@ https://en.wikipedia.org/wiki/Breadth-first_search
 https://medium.com/basecs/going-broad-in-a-graph-bfs-traversal-959bd1a09255
 
 4.
-##The mission
+## The mission
 Part 1 - Connected or not?
 
 Use the `Graph` structure to find out if cities a and b are connected or not
