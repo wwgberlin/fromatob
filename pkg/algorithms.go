@@ -61,21 +61,3 @@ func (g *Graph) ShortestPath(a, b int) []int {
 
 	return path
 }
-
-type Queue struct {
-	list []int
-}
-
-func (q *Queue) Length() int {
-	return len(q.list)
-}
-
-func (q *Queue) Enqueue(i int) {
-	q.list = append(q.list, i)
-}
-
-func (q *Queue) Dequeue() int {
-	i := q.list[0]
-	q.list = q.list[1:]
-	return i
-}
