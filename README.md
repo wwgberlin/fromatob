@@ -89,3 +89,16 @@ Well done on completing part 1! Now that you know if cities a to b are connected
 Tips on how to start:
 - Fill in the ShortestPath function in `pkg/algorithms.go`
 - A path is represented by a slice of int with the node IDs. For example, a path from node 4 to node 6 and then to node 2 would be represented by `[]int{4, 6, 2}`
+
+
+## Bonus mission
+
+If you've completed the mission and you're getting bored of graph algorithms, let's look at graph data structures instead!
+
+There's more than one way to store the edges in a graph. The one in `pkg/graph.go` uses an “adjacency list,” which means for each node it stores a list of its neighbors -- that's the `edges` field in the struct.
+
+Another way is to create a 2-D matrix of booleans. The boolean in row i, column j of the matrix will be true if there's an edge from node i to node j, otherwise it'll be false. This is called an “adjacency matrix.”
+
+Try to change the Graph to use an adjacency matrix instead of an adjacency list! Do it in a way that the code you wrote in `pkg/algorithms.go` still works -- the methods that access the Graph should work as before.
+
+However, if you want to change the way the graph is *created*, go ahead! You'll just need to adapt the `LoadGraph` function in `pkg/files.go`.
