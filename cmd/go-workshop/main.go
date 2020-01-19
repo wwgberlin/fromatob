@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	filename := "paths.md"
+	filename := "trains.txt"
 	g, err := pkg.LoadGraph(filename)
 	if err != nil {
 		fmt.Println(err)
