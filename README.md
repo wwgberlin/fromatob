@@ -80,7 +80,7 @@ Part 1 - Connected or not?
 Use the `Graph` structure to find out if cities a and b are connected or not
 Tips on how to start:
 - In `pkg/algorithms.go` fill in the `Connected` function so it returns true
-- Try running `go run cmd/main/main.go` to see the Graph structure. If your algorthm works, it should print “ok” on each line.
+- Try running `go run cmd/go-workshop/main.go` to see the Graph structure. If your algorthm works, it should print “ok” on each line.
 - There's a `Queue` type in `pkg/queue.go` which will be useful if you decide to implement BFS.
 
 Part 2 - Shortest path
