@@ -61,29 +61,3 @@ func (g *Graph) ShortestPath(a, b int) []int {
 
 	return path
 }
-
-type Queue struct {
-	list []int
-}
-
-func (q *Queue) Length() int {
-	return len(q.list)
-}
-
-func (q *Queue) Enqueue(i int) {
-	q.list = append(q.list, i)
-}
-
-func (q *Queue) Dequeue() int {
-	i := q.list[0]
-	q.list = q.list[1:]
-	return i
-}
-
-// reversePath will reverse the path, e.g. [5, 7, 2] becomes [2, 7, 5].
-func reversePath(path []int) {
-	for i := 0; i < len(path)/2; i++ {
-		j := len(path) - 1 - i
-		path[i], path[j] = path[j], path[i]
-	}
-}
