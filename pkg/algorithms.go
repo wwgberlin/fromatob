@@ -3,7 +3,32 @@ package pkg
 // Connected checks if the given nodes are connected by a path.
 func (g *Graph) Connected(a, b int) bool {
 	// mission 1: find out if there's a path from a to b
+	return g.bfs(a, b)
+}
 
+func (g *Graph) dfs(a, b int) bool {
+	// solution for part 1 using DFS (depth-first search)
+	discovered := make([]bool, g.Nodes())
+	var f func(int) bool
+	f = func(v int) bool {
+		discovered[v] = true
+		if v == b {
+			return true
+		}
+		for _, n := range g.Neighbors(v) {
+			if !discovered[n] {
+				if f(n) {
+					return true
+				}
+			}
+		}
+		return false
+	}
+	return f(a)
+}
+
+func (g *Graph) bfs(a, b int) bool {
+	// solution for part 1 using BFS (breadth-first search)
 	var q Queue
 	q.Enqueue(a)
 	discovered := make([]bool, g.Nodes())
@@ -27,6 +52,7 @@ func (g *Graph) Connected(a, b int) bool {
 func (g *Graph) ShortestPath(a, b int) []int {
 	// mission 2: find the shortest path from a to b
 
+	// depth-first search, using parent to store how we got to each node
 	var q Queue
 	q.Enqueue(a)
 	parent := make([]int, g.Nodes())
@@ -46,6 +72,7 @@ func (g *Graph) ShortestPath(a, b int) []int {
 		}
 	}
 
+	// follow "parent" back from b to a
 	reversePath := []int{b}
 	next := b
 	for next != a {
@@ -53,6 +80,7 @@ func (g *Graph) ShortestPath(a, b int) []int {
 		reversePath = append(reversePath, next)
 	}
 
+	// reverse the slice to get the path from a to b
 	l := len(reversePath)
 	path := make([]int, len(reversePath))
 	for i, x := range reversePath {
