@@ -8,7 +8,7 @@ func (g *Graph) Connected(a, b int) bool {
 
 func (g *Graph) dfs(a, b int) bool {
 	// solution for part 1 using DFS (depth-first search)
-	discovered := make([]bool, g.Nodes())
+	discovered := make([]bool, g.NumNodes())
 	var f func(int) bool
 	f = func(v int) bool {
 		discovered[v] = true
@@ -31,7 +31,7 @@ func (g *Graph) bfs(a, b int) bool {
 	// solution for part 1 using BFS (breadth-first search)
 	var q Queue
 	q.Enqueue(a)
-	discovered := make([]bool, g.Nodes())
+	discovered := make([]bool, g.NumNodes())
 	discovered[a] = true
 	for q.Length() > 0 {
 		v := q.Dequeue()
@@ -55,8 +55,8 @@ func (g *Graph) ShortestPath(a, b int) []int {
 	// depth-first search, using parent to store how we got to each node
 	var q Queue
 	q.Enqueue(a)
-	parent := make([]int, g.Nodes())
-	discovered := make([]bool, g.Nodes())
+	parent := make([]int, g.NumNodes())
+	discovered := make([]bool, g.NumNodes())
 	discovered[a] = true
 	for q.Length() > 0 {
 		v := q.Dequeue()

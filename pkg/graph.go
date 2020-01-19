@@ -8,8 +8,9 @@ import (
 // A Graph consists of a set of nodes, each of which has an ID and a name, and a set of edges. An
 // edge is simply a connection between two nodes.
 type Graph struct {
-	nodes []string
-	edges [][]int
+	nodes    []string
+	matrix   [][]bool
+	capacity int // number of rows / columns of matrix
 }
 
 // NumNodes returns the number of nodes in the graph.
@@ -19,11 +20,17 @@ func (g *Graph) NumNodes() int {
 
 // Neighbors returns the list of neighbors of a given node.
 func (g *Graph) Neighbors(i int) []int {
-	if len(g.edges) <= i {
+	if len(g.matrix) <= i {
 		return nil
 	}
 
-	return g.edges[i]
+	var neighbors []int
+	for j, value := range g.matrix[i] {
+		if value {
+			neighbors = append(neighbors, j)
+		}
+	}
+	return neighbors
 }
 
 // PathExists checks if the given path exists in the graph. The path is specified by a list of the
@@ -67,8 +74,23 @@ func (g *Graph) AddNode(name string) int {
 	}
 	i = len(g.nodes)
 	g.nodes = append(g.nodes, name)
-	g.edges = append(g.edges, []int{})
+	if g.capacity < len(g.nodes) {
+		g.resizeMatrix()
+	}
 	return i
+}
+
+func (g *Graph) resizeMatrix() {
+	oldCapacity := g.capacity
+	g.capacity = 2 * g.NumNodes() // 2 * needed so we don't have to constantly resize
+	oldMatrix := g.matrix
+	g.matrix = make([][]bool, g.capacity)
+	for i := range g.matrix {
+		g.matrix[i] = make([]bool, g.capacity)
+		if i < oldCapacity {
+			copy(g.matrix[i], oldMatrix[i])
+		}
+	}
 }
 
 // LookupNode looks up a node by name. If the node can't be found, it returns ok == false.
@@ -90,8 +112,8 @@ func (g *Graph) AddEdge(i, j int) {
 	if g.HasEdge(i, j) {
 		return
 	}
-	g.edges[i] = append(g.edges[i], j)
-	g.edges[j] = append(g.edges[j], i)
+	g.matrix[i][j] = true
+	g.matrix[j][i] = true
 }
 
 // AddEdge adds a directed edge between the given nodes.
@@ -107,12 +129,7 @@ func (g *Graph) HasEdge(i, j int) bool {
 	if !g.ValidNode(i) || !g.ValidNode(j) {
 		return false
 	}
-	for _, k := range g.edges[i] {
-		if k == j {
-			return true
-		}
-	}
-	return false
+	return g.matrix[i][j]
 }
 
 // ValidNode returns true if i is the ID of a node in the graph.
