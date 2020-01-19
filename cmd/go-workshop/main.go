@@ -60,18 +60,17 @@ func mission2(g *pkg.Graph) {
 		wantLength int
 	}{
 		{"Berlin", "München", 4},
-		{"Leipzig", "Dortmund", 4},
-		{"Aachen", "Berlin", 5},
-		{"Frankfurt", "Nürnberg", 2},
-		{"Hamburg", "Bremen", 1},
+		{"Jena", "Aachen", 5},
+		{"Hamburg", "Augsburg", 5},
+		{"Hiroshima", "Tokyo", 2},
 	}
 	for _, c := range cases {
-		fmt.Printf("%-9s -- %-9s ", c.a, c.b)
+		fmt.Printf("%-9s -> %-9s ", c.a, c.b)
 		a, _ := g.LookupNode(c.a)
 		b, _ := g.LookupNode(c.b)
 		got := g.ShortestPath(a, b)
 		if len(got) == 0 {
-			fmt.Println("    no result")
+			fmt.Println("no result")
 			continue
 		}
 		gotLength := len(got) - 1
