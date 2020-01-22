@@ -14,7 +14,7 @@ func main() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	fmt.Printf("Loaded %s (%d nodes)\n", filename, g.Nodes())
+	fmt.Printf("Loaded %s (%d nodes)\n", filename, g.NumNodes())
 
 	mission1(g)
 	mission2(g)

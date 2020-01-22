@@ -12,8 +12,8 @@ type Graph struct {
 	edges [][]int
 }
 
-// Nodes returns the number of nodes in the graph.
-func (g *Graph) Nodes() int {
+// NumNodes returns the number of nodes in the graph.
+func (g *Graph) NumNodes() int {
 	return len(g.nodes)
 }
 
