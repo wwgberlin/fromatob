@@ -10,7 +10,6 @@ import (
 )
 
 func TestGraph_ConnectedNoCycle(t *testing.T) {
-	t.Log("Test simple directed graph with no cycles")
 	var g pkg.Graph
 	a := g.AddNode("A")
 	b := g.AddNode("B")
@@ -24,6 +23,7 @@ func TestGraph_ConnectedNoCycle(t *testing.T) {
 		a, b string
 		res  bool
 	}{
+		{"A", "A", true},
 		{"A", "C", true},
 		{"C", "A", false},
 		{"A", "D", false},
@@ -46,7 +46,6 @@ func TestGraph_ConnectedNoCycle(t *testing.T) {
 	}
 }
 func TestGraph_ConnectedNonDirected(t *testing.T) {
-	t.Log("Test non directed graph (for each edge a->b there's an edge b->a)")
 	var g pkg.Graph
 	a := g.AddNode("A")
 	b := g.AddNode("B")
@@ -61,6 +60,7 @@ func TestGraph_ConnectedNonDirected(t *testing.T) {
 		a, b string
 		res  bool
 	}{
+		{"A", "A", true},
 		{"A", "C", true},
 		{"A", "D", false},
 		{"D", "A", false},
@@ -84,7 +84,6 @@ func TestGraph_ConnectedNonDirected(t *testing.T) {
 }
 
 func TestGraph_ShortestPath(t *testing.T) {
-	t.Log("Test non directed graph (for each edge a->b there's an edge b->a)")
 	var g pkg.Graph
 	a := g.AddNode("A")
 	b := g.AddNode("B")
@@ -99,6 +98,7 @@ func TestGraph_ShortestPath(t *testing.T) {
 		a, b string
 		res  []int
 	}{
+		{"B", "B", []int{0}},
 		{"A", "C", []int{0, 1, 2}},
 		{"C", "A", []int{2, 1, 0}},
 		{"A", "D", nil},
@@ -108,6 +108,8 @@ func TestGraph_ShortestPath(t *testing.T) {
 	}
 	for _, c := range tcases {
 		done := make(chan struct{})
+		ai, _ := g.LookupNode(c.a)
+		bi, _ := g.LookupNode(c.b)
 		go func() {
 			res := shortestPath(g, c.a, c.b)
 			if c.res == nil {
@@ -115,15 +117,15 @@ func TestGraph_ShortestPath(t *testing.T) {
 					t.Errorf("unexpected shortest path from '%s' to '%s'. Expected an empty path (not connected), but received '%s'",
 						c.a, c.b, g.PrintPath(res, "->"))
 				}
-			}
-			if !reflect.DeepEqual(c.res, res) {
-				if !g.PathExists(res) {
-					t.Errorf("unexpected shortest path from %s to %s: %s\n", c.a, c.b, g.PrintPath(res, "->"))
+			} else if !reflect.DeepEqual(c.res, res) {
+				if len(res) == 0 || res[0] != ai || res[len(res)-1] != bi {
+					t.Errorf("unexpected shortest path from %s to %s: '%s'\n", c.a, c.b, g.PrintPath(res, "->"))
+				} else if !g.PathExists(res) {
+					t.Errorf("unexpected shortest path from %s to %s: '%s'\n", c.a, c.b, g.PrintPath(res, "->"))
 				} else if len(c.res) != len(res) {
-					t.Errorf("unexpected shortest path from %s to %s: %s has length %d, but we can do better!\n",
+					t.Errorf("unexpected shortest path from %s to %s: '%s' has length %d, but we can do better!\n",
 						c.a, c.b, g.PrintPath(res, "-"), len(res))
 				}
-
 			}
 			close(done)
 		}()
