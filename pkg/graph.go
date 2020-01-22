@@ -86,7 +86,7 @@ func (g *Graph) AddEdge(i, j int) {
 	g.edges[j] = append(g.edges[j], i)
 }
 
-// AddEdge adds an edge between the given nodes.
+// AddEdge adds a directed edge between the given nodes.
 func (g *Graph) AddEdgeDirected(i, j int) {
 	if g.HasEdge(i, j) {
 		return
