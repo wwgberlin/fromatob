@@ -17,7 +17,7 @@ fromAtoB's vision is to combine flights, trains, long distance buses and car-poo
 
 ## 1. What are graphs?
 
-Graphs are mathematical structures used to model pairwise relations between objects. A graph in this context is made up of vertices (also called nodes or points) which are connected by edges
+Graphs are mathematical structures used to model pairwise relations between objects. A graph in this context is made up of nodes (also called vertices or points) which are connected by edges
 
 https://en.wikipedia.org/wiki/Graph_theory
 
