@@ -20,7 +20,7 @@ func (g *Graph) NumNodes() int {
 // Neighbors returns the list of neighbors of a given node.
 func (g *Graph) Neighbors(i int) []int {
 	if len(g.edges) <= i {
-		return []int{}
+		return nil
 	}
 
 	return g.edges[i]
