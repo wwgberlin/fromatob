@@ -19,6 +19,10 @@ func (g *Graph) NumNodes() int {
 
 // Neighbors returns the list of neighbors of a given node.
 func (g *Graph) Neighbors(i int) []int {
+	if len(g.edges) <= i {
+		return []int{}
+	}
+
 	return g.edges[i]
 }
 
@@ -79,6 +83,10 @@ func (g *Graph) LookupNode(name string) (id int, ok bool) {
 
 // AddEdge adds an edge between the given nodes.
 func (g *Graph) AddEdge(i, j int) {
+	if !g.ValidNode(i) || !g.ValidNode(j) {
+		return
+	}
+
 	if g.HasEdge(i, j) {
 		return
 	}
@@ -96,7 +104,7 @@ func (g *Graph) AddEdgeDirected(i, j int) {
 
 // HasEdge returns true if there is an edge between the given nodes.
 func (g *Graph) HasEdge(i, j int) bool {
-	if !g.ValidNode(i) && g.ValidNode(j) {
+	if !g.ValidNode(i) || !g.ValidNode(j) {
 		return false
 	}
 	for _, k := range g.edges[i] {
