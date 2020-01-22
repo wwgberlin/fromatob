@@ -14,7 +14,7 @@ func (g *Graph) ShortestPath(a, b int) []int {
 
 // reversePath will reverse the path, e.g. [5, 7, 2] becomes [2, 7, 5].
 func reversePath(path []int) {
-	for i := 0; i < len(path); i++ {
+	for i := 0; i < len(path)/2; i++ {
 		j := len(path) - 1 - i
 		path[i], path[j] = path[j], path[i]
 	}
