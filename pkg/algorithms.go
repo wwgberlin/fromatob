@@ -58,9 +58,11 @@ func (g *Graph) ShortestPath(a, b int) []int {
 	parent := make([]int, g.NumNodes())
 	discovered := make([]bool, g.NumNodes())
 	discovered[a] = true
+	found := false
 	for q.Length() > 0 {
 		v := q.Dequeue()
 		if v == b {
+			found = true
 			break
 		}
 		for _, w := range g.Neighbors(v) {
@@ -72,6 +74,9 @@ func (g *Graph) ShortestPath(a, b int) []int {
 		}
 	}
 
+	if !found {
+		return nil
+	}
 	// follow "parent" back from b to a
 	reversePath := []int{b}
 	next := b
