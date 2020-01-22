@@ -8,9 +8,8 @@ import (
 // A Graph consists of a set of nodes, each of which has an ID and a name, and a set of edges. An
 // edge is simply a connection between two nodes.
 type Graph struct {
-	nodes    []string
-	matrix   [][]bool
-	capacity int // number of rows / columns of matrix
+	nodes  []string
+	matrix [][]bool
 }
 
 // NumNodes returns the number of nodes in the graph.
@@ -74,23 +73,12 @@ func (g *Graph) AddNode(name string) int {
 	}
 	i = len(g.nodes)
 	g.nodes = append(g.nodes, name)
-	if g.capacity < len(g.nodes) {
-		g.resizeMatrix()
+
+	g.matrix = append(g.matrix, make([]bool, len(g.matrix)))
+	for i := range g.matrix {
+		g.matrix[i] = append(g.matrix[i], false)
 	}
 	return i
-}
-
-func (g *Graph) resizeMatrix() {
-	oldCapacity := g.capacity
-	g.capacity = 2 * g.NumNodes() // 2 * needed so we don't have to constantly resize
-	oldMatrix := g.matrix
-	g.matrix = make([][]bool, g.capacity)
-	for i := range g.matrix {
-		g.matrix[i] = make([]bool, g.capacity)
-		if i < oldCapacity {
-			copy(g.matrix[i], oldMatrix[i])
-		}
-	}
 }
 
 // LookupNode looks up a node by name. If the node can't be found, it returns ok == false.
