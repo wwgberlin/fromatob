@@ -118,6 +118,9 @@ func (g *Graph) AddEdge(i, j int) {
 
 // AddEdge adds a directed edge between the given nodes.
 func (g *Graph) AddEdgeDirected(i, j int) {
+	if !g.ValidNode(i) || !g.ValidNode(j) {
+		return
+	}
 	g.matrix[i][j] = true
 }
 
