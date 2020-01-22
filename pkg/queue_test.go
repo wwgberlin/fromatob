@@ -24,8 +24,9 @@ func TestQueue(t *testing.T) {
 		t.Fatalf("queue length not 1")
 	}
 	if q.Dequeue() != 5 {
-		if q.Length() != 0 {
-			t.Fatalf("queue length should be 0")
-		}
+		t.Fatal("value expected to be 5")
+	}
+	if q.Length() != 0 {
+		t.Fatalf("queue length should be 0")
 	}
 }
