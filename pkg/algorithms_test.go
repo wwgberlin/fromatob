@@ -1,16 +1,15 @@
-package pkg_test
+package pkg
 
 import (
 	"testing"
 
-	"github.com/fromAtoB/go-workshop/pkg"
 	"fmt"
 	"time"
 	"reflect"
 )
 
 func TestGraph_ConnectedNoCycle(t *testing.T) {
-	var g pkg.Graph
+	var g Graph
 	a := g.AddNode("A")
 	b := g.AddNode("B")
 	c := g.AddNode("C")
@@ -46,7 +45,7 @@ func TestGraph_ConnectedNoCycle(t *testing.T) {
 	}
 }
 func TestGraph_ConnectedNonDirected(t *testing.T) {
-	var g pkg.Graph
+	var g Graph
 	a := g.AddNode("A")
 	b := g.AddNode("B")
 	c := g.AddNode("C")
@@ -84,7 +83,7 @@ func TestGraph_ConnectedNonDirected(t *testing.T) {
 }
 
 func TestGraph_ShortestPath(t *testing.T) {
-	var g pkg.Graph
+	var g Graph
 	a := g.AddNode("A")
 	b := g.AddNode("B")
 	c := g.AddNode("C")
@@ -138,7 +137,7 @@ func TestGraph_ShortestPath(t *testing.T) {
 
 }
 
-func connected(g pkg.Graph, a, b string) bool {
+func connected(g Graph, a, b string) bool {
 	ai, ok := g.LookupNode(a)
 	if !ok {
 		panic(fmt.Sprintf("'%s' not found in graph", a))
@@ -150,7 +149,7 @@ func connected(g pkg.Graph, a, b string) bool {
 	return g.Connected(ai, bi)
 }
 
-func shortestPath(g pkg.Graph, a, b string) []int {
+func shortestPath(g Graph, a, b string) []int {
 	ai, ok := g.LookupNode(a)
 	if !ok {
 		panic(fmt.Sprintf("'%s' not found in graph", a))
